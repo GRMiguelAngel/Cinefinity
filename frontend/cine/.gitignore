@@ -77,6 +77,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
+env.d.ts
 .env
 .env.development.local
 .env.test.local
@@ -143,11 +144,6 @@ dist
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -171,4 +167,4 @@ docs/_book
 # TODO: where does this rule come from?
 test/
 
-# End of https://www.toptal.com/developers/gitignore/api/node,vue,visualstudiocode
+package-lock.json
