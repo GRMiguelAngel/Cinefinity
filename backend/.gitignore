@@ -186,3 +186,4 @@ cython_debug/
 .ionide
 
 manage.py
+*/MEDIA_ROOT/

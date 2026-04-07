@@ -1,23 +1,24 @@
 from rest_framework import serializers
 from .models import Movie, Genre
 
-class MovieSerializer(serializers.Serializer):
-    title = serializers.CharField(max_length=100)
-    duration = serializers.DurationField()
-    genres = serializers.PrimaryKeyRelatedField(many=True, queryset=Genre.objects.all())
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ['title', 'duration', 'cover', 'genres']
 
-    def create(self, data):
-        genres = data.pop('genres')
-        movie = Movie.objects.create(**data)
+    def create(self, validated_data):
+        genres = validated_data.pop('genres')
+        movie = Movie.objects.create(**validated_data)
         movie.genres.set(genres)
         return movie
     
-    def update(self, instance, data):
-        instance.title = data.get('title', instance.title)
-        instance.duration = data.get('duration', instance.duration)
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.cover = validated_data.get('cover', instance.cover)
+        instance.duration = validated_data.get('duration', instance.duration)
 
-        if 'genres' in data:
-            instance.genres.set(data['genres'])
+        if 'genres' in validated_data:
+            instance.genres.set(validated_data['genres'])
 
         instance.save()
         return instance
